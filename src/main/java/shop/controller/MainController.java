@@ -48,6 +48,14 @@ public class MainController {
 		model.setViewName("home");
 		return model;
 	}
+	
+	
+	@RequestMapping(value = "/checkout")
+	public ModelAndView checkout(ModelAndView model) {
+		model.setViewName("shopping-cart");
+		return model;
+	}
+	
 
 	@RequestMapping(value = "/admin")
 	public ModelAndView admin(ModelAndView model, @ModelAttribute Account acc) {
@@ -69,7 +77,7 @@ public class MainController {
 	public ModelAndView listContact(ModelAndView model , @RequestParam("username") String username, @RequestParam("password") String password) {
 
 		Account acc = accountService.login(username, password);
-		if(acc!=null) {	
+		if(acc!=null && acc.getEnable() == true) {	
 			if(acc.getPosition().equals("admin")) {
 				return new ModelAndView("redirect:/admin");
 			}else if(acc.getPosition().equals("customer")) {
@@ -88,4 +96,7 @@ public class MainController {
 		return model;
 		
 	}
+	
+	
+	
 }

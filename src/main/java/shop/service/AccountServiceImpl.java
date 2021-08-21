@@ -47,5 +47,17 @@ public class AccountServiceImpl implements AccountService{
 		// TODO Auto-generated method stub
 		return accountDAO.login(username, password);
 	}
+
+	@Override
+	public int getId(String username) {
+		// TODO Auto-generated method stub
+		return accountDAO.getId(username);
+	}
+
+	@Override
+	public int block(Integer id) {
+		// TODO Auto-generated method stub
+		return accountDAO.block(id);
+	}
 	
 }

@@ -17,24 +17,25 @@ import shop.model.Account;
 
 @Repository
 public class AccountDAOImpl implements AccountDAO {
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	public AccountDAOImpl(JdbcTemplate jdbc) {
-		this.jdbcTemplate =jdbc;
+	public AccountDAOImpl(DataSource dataSource) {
+		this.jdbcTemplate =new JdbcTemplate(dataSource);
 		
 	}
 	
 	@Override
 	public int save(Account acc) {
-		String sql = "INSERT INTO Account (username, password, position) VALUES(?, ?, ?)";
-		return jdbcTemplate.update(sql, acc.getUsername(), acc.getPassword(), acc.getPosition());
+		String sql = "INSERT INTO Account (username, password, position, enable) VALUES(?, ?, ?, ?)";
+		return jdbcTemplate.update(sql, acc.getUsername(), acc.getPassword(), acc.getPosition(), acc.getEnable());
 	}
 
 	@Override
 	public int update(Account acc) {
-		String sql = "UPDATE Account Set username = ?, password = ?, position = ? WHERE id = ?";
-		return jdbcTemplate.update(sql, acc.getUsername(), acc.getPassword(), acc.getPosition(), acc.getId());
+		String sql = "UPDATE Account Set username = ?, password = ?, position = ?, enable = ? WHERE id = ?";
+		return jdbcTemplate.update(sql, acc.getUsername(), acc.getPassword(), acc.getPosition(), acc.getEnable(), acc.getId());
 	
 	}
 
@@ -51,7 +52,8 @@ public class AccountDAOImpl implements AccountDAO {
 					String username = rs.getString("username");
 					String password = rs.getString("password");
 					String position = rs.getString("position");
-					return new Account(id, username, password, position);
+					Boolean enable = rs.getBoolean("enable");
+					return new Account(id, username, password, position, enable);
 				}
 				return null;
 				
@@ -79,7 +81,8 @@ public class AccountDAOImpl implements AccountDAO {
 				String username = rs.getString("username");
 				String password = rs.getString("password");
 				String position = rs.getString("position");
-				return new Account(id, username, password, position);
+				Boolean enable = rs.getBoolean("enable");
+				return new Account(id, username, password, position, enable);
 			}
 		};
 		return jdbcTemplate.query(sql, rowMapper);
@@ -98,7 +101,8 @@ public class AccountDAOImpl implements AccountDAO {
 					String username = rs.getString("username");
 					String password = rs.getString("password");
 					String position = rs.getString("position");
-					return new Account(id,username, password, position);
+					Boolean enable = rs.getBoolean("enable");
+					return new Account(id,username, password, position, enable);
 				}
 				return null;
 				
@@ -106,6 +110,19 @@ public class AccountDAOImpl implements AccountDAO {
 			
 		};
 		return jdbcTemplate.query(sql, extractor);
+	}
+
+	@Override
+	public int getId(String username) {
+		String sql = "Select id from Account where username = "+"'"+username+"'";
+		return jdbcTemplate.queryForObject(sql, Integer.class);
+	}
+
+	@Override
+	public int block(Integer id) {
+		String sql = "UPDATE Account Set enable = ? WHERE id = ?";
+		return jdbcTemplate.update(sql, false, id);
+	
 	}
 
 

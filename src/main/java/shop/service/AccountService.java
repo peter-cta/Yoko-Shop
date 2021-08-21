@@ -11,4 +11,6 @@ public interface AccountService {
 	public int delete(Integer id);
 	public List<Account> list();
 	public Account login(String username, String password);
+	public int getId(String username);
+	public int block(Integer id);
 }

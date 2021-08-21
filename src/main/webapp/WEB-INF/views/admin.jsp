@@ -166,6 +166,7 @@
 							<th scope="col">UserName</th>
 							<th scope="col">Password</th>
 							<th scope="col">Position</th>
+							<th scope="col">Enable</th>
 							<th scope="col">Actions</th>
 
 
@@ -178,8 +179,12 @@
 								<td>${acc.username}</td>
 								<td>${acc.password}</td>
 								<td>${acc.position}</td>
+								<td>${acc.enable}</td>
 								<td><a href="editAccount?id=${acc.id}">Edit</a> &nbsp;&nbsp; <a
-									href="deleteAccount?id=${acc.id}">Delete</a></td>
+									href="deleteAccount?id=${acc.id}">Delete</a>
+									&nbsp;&nbsp;
+									<a href="blockAccount?id=${acc.id}" style="color: red">Block</a>
+								</td>
 							</tr>
 
 						</c:forEach>

@@ -46,11 +46,11 @@
 				</div>
 			</nav>
 			<div class="cart" style="margin-left: 200px; margin-top: 5px">
-				<a href="#" class="fa fa-shopping-cart" style="font-size: 20px; color: black;">
+				<a href="checkout" class="fa fa-shopping-cart" style="font-size: 20px; color: black;">
 					Cart</a>
 			</div>
 			<div class="account" style="margin-left: 15px; ; margin-top: 5px">
-				<a href="login" class="fa fa-user" style="font-size: 20px; color: black;">
+				<a href="register" class="fa fa-user" style="font-size: 20px; color: black;">
 					${status != 'notlogin' ? acc.username : "Login"} </a>
 			</div>
 		</div>

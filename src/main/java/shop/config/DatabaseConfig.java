@@ -8,12 +8,13 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
 public class DatabaseConfig {
-   @Bean
+   
+	@Bean
    public DataSource dataSource(){
       DriverManagerDataSource dataSource = new DriverManagerDataSource();
       dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-      dataSource.setUrl("jdbc:mysql://www.db4free.net:3306/yokoshop");
-      dataSource.setUsername("yokoshop");
+      dataSource.setUrl("jdbc:mysql://localhost:3306/YokoShop");
+      dataSource.setUsername("root");
       dataSource.setPassword("chuanh255");
       return dataSource;
    }

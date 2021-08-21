@@ -12,13 +12,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import shop.dao.AccountDAO;
 import shop.model.Account;
+import shop.model.Customer;
 import shop.service.AccountService;
+import shop.service.CustomerService;
 
 @Controller
 public class AccountController {
 	
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private CustomerService customerService;
 
 	@RequestMapping(value = "/logout")
 	public ModelAndView Logout(ModelAndView model) {
@@ -29,6 +34,12 @@ public class AccountController {
 	@RequestMapping(value = "/login")
 	public ModelAndView login(ModelAndView model) {
 		model.setViewName("login");
+		return model;
+	}
+	
+	@RequestMapping(value = "/register")
+	public ModelAndView register(ModelAndView model) {
+		model.setViewName("register");
 		return model;
 	}
 
@@ -67,6 +78,28 @@ public class AccountController {
 	@RequestMapping(value = "/deleteAccount", method = RequestMethod.GET)
 	public ModelAndView deleteAccount(@RequestParam Integer id) {
 		accountService.delete(id);
+		return new ModelAndView("redirect:/admin");
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public ModelAndView register(ModelAndView model , @RequestParam("name") String name, 
+			@RequestParam("email") String email, @RequestParam("phone") String phone,
+			@RequestParam("address") String address, @RequestParam("username") String username,
+			@RequestParam("password") String password) {
+			
+			Account acc = new Account(username, password, "customer", true);
+			accountService.save(acc);
+			int id = accountService.getId(username);
+			Customer cus = new Customer(name, email, phone, address, id);
+			customerService.save(cus);		
+			model.setViewName("login");
+		return model;
+		
+	}
+	
+	@RequestMapping(value = "/blockAccount", method = RequestMethod.GET)
+	public ModelAndView blockAccount(@RequestParam Integer id) {
+		accountService.block(id);
 		return new ModelAndView("redirect:/admin");
 	}
 }

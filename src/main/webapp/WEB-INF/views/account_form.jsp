@@ -28,6 +28,11 @@
 					<td>Position:</td>
 					<td><form:input  path="position"/></td>
 				</tr>
+				
+				<tr>
+					<td>Enable:</td>
+					<td><form:input  path="enable"/></td>
+				</tr>
 
 				<tr>
 					<td colspan="2" align="center"><input type="submit" value="Save"/></td>
