@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import shop.dao.AccountDAO;
 import shop.model.Account;
+import shop.model.Cart;
 import shop.model.Customer;
 import shop.service.AccountService;
+import shop.service.CartService;
 import shop.service.CustomerService;
 
 @Controller
@@ -24,6 +25,9 @@ public class AccountController {
 	
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private CartService cartService;
 
 	@RequestMapping(value = "/logout")
 	public ModelAndView Logout(ModelAndView model) {
@@ -91,7 +95,10 @@ public class AccountController {
 			accountService.save(acc);
 			int id = accountService.getId(username);
 			Customer cus = new Customer(name, email, phone, address, id);
-			customerService.save(cus);		
+			double price = 0;
+			Cart cart = new Cart(price, id);
+			customerService.save(cus);
+			cartService.save(cart);
 			model.setViewName("login");
 		return model;
 		

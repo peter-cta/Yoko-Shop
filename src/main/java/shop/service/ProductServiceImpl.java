@@ -44,4 +44,22 @@ public class ProductServiceImpl implements ProductService{
 		return productDAO.list();
 	}
 
+	@Override
+	public List<Product> getGucci() {
+		// TODO Auto-generated method stub
+		return productDAO.getGucci();
+	}
+
+	@Override
+	public List<Product> get8seconds() {
+		// TODO Auto-generated method stub
+		return productDAO.get8seconds();
+	}
+
+	@Override
+	public List<Product> getShanghai() {
+		// TODO Auto-generated method stub
+		return productDAO.getShanghai();
+	}
+
 }

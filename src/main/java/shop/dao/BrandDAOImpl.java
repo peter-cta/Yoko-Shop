@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import shop.model.Account;
 import shop.model.Brand;
+
 @Repository
 public class BrandDAOImpl implements BrandDAO {
 	@Autowired

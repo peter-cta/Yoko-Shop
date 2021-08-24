@@ -52,7 +52,7 @@ a .login{
 				<div id="register-column" class="col-md-6">
 					<div id="register-box" class="col-md-12">
 						<form:form id="register-form" class="form" action="register" method="post">
-							<h3 class="text-center text-info">Registation</h3>
+							<h3 class="text-center text-info">Đăng Kí Tài Khoản</h3>
                             <div class="form-group">
 								<label for="name" class="text-info">Name:</label><br>
 								<input type="text" name = "name" id="username" class="form-control">
@@ -81,14 +81,12 @@ a .login{
 								<input type="password" name = "password" id="password" class="form-control">
 							</div>
 							<div class="form-group">
-								<label for="remember-me" class="text-info"><span>I agree
-										</span> <span><input id="remember-me" name="remember-me"
-										type="checkbox"></span></label>
+								
                                 <br> 
                                 <input type="submit"
-									name="submit" class="btn btn-info btn-md" value="submit">
+									name="submit" class="btn btn-info btn-md" value="Submit">
                                 
-                                <a href="login" style="margin-left: 300px; font-size:18; text-decoration:underline;" >login here</a>
+                                <a href="/login" style="margin-left: 300px; font-size:18; text-decoration:underline;" >Login here</a>
 							</div>
                             
 						</form:form>

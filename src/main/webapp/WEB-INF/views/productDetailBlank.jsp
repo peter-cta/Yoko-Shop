@@ -73,9 +73,9 @@
 								class="color green"></span> <span class="color blue"></span>
 						</h5>
 						<div class="action">
-							<a href="/addToCart?id=${acc.id}&&idp=${product.id}" class="add-to-cart btn btn-default" type="button">add
+							<a href="#" class="add-to-cart btn btn-default" type="button">add
 								to cart</a>
-							<a href="/backToShop?id=${acc.id}" class="add-to-cart btn btn-default" >Continue shopping</a>
+							<a href="/backToShopbl" class="add-to-cart btn btn-default" >Continue shopping</a>
 						</div>
 					</div>
 				</div>

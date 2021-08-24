@@ -89,4 +89,30 @@ public class CustomerDAOImpl implements CustomerDAO {
 		return jdbcTemplate.query(sql, rowMapper);
 	}
 
+
+	@Override
+	public Customer getCustomerFromAccID(int accId) {
+		String sql = "Select * from Customer where account_id = "+accId;
+		
+		ResultSetExtractor<Customer> extractor = new  ResultSetExtractor<Customer>() {
+
+			@Override
+			public Customer extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if(rs.next()) {
+					Integer id = rs.getInt("id");
+					String name = rs.getString("name");
+					String email = rs.getString("email");
+					String phone = rs.getString("phone");
+					String address = rs.getString("address");
+					Integer account_id = rs.getInt("account_id");
+					return new Customer(id, name, email, phone, address, account_id);
+				}
+				return null;
+				
+			}
+			
+		};
+		return jdbcTemplate.query(sql, extractor);
+	}
+
 }

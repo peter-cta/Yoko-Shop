@@ -10,4 +10,5 @@ public interface CustomerService {
 	public Customer get(Integer id);
 	public int delete(Integer id);
 	public List<Customer> list();
+	public Customer getCustomerFromAccID(int accId);
 }

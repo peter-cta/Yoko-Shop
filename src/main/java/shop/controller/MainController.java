@@ -19,10 +19,12 @@ import shop.dao.BrandDAO;
 import shop.dao.CustomerDAO;
 import shop.dao.ProductDAO;
 import shop.model.Account;
+import shop.model.Bill;
 import shop.model.Brand;
 import shop.model.Customer;
 import shop.model.Product;
 import shop.service.AccountService;
+import shop.service.BillService;
 import shop.service.BrandService;
 import shop.service.CustomerService;
 import shop.service.ProductService;
@@ -38,23 +40,22 @@ public class MainController {
 	@Autowired
 	private BrandService brandService;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@Autowired
+	private BillService billService;
+	
+	@RequestMapping(value = "/")
 	public ModelAndView Login(ModelAndView model) {
 		List<Product> listPro = productService.list();
 		List<Brand> listBrand = brandService.list();
 		model.addObject("listPro", listPro);
 		model.addObject("listBrand", listBrand);
 		model.addObject("status", "notlogin");
-		model.setViewName("home");
+		model.setViewName("homeBlank");
 		return model;
 	}
 	
 	
-	@RequestMapping(value = "/checkout")
-	public ModelAndView checkout(ModelAndView model) {
-		model.setViewName("shopping-cart");
-		return model;
-	}
+	
 	
 
 	@RequestMapping(value = "/admin")
@@ -63,10 +64,18 @@ public class MainController {
 		List<Product> listPro = productService.list();
 		List<Customer> listCus = customerService.list();
 		List<Brand> listBrand = brandService.list();
+		List<Bill> listBill = billService.list();
+		List<Customer> lisCustomers = billService.getListCustomerFromBill(listBill);
+		List<List> listProductInBill = billService.getListProductInBill(listBill);
+		List<List> listCartItemsInBill = billService.getListCartItemsInBill(listBill);
 		model.addObject("listAcc", listAcc);
 		model.addObject("listPro", listPro);
 		model.addObject("listCus", listCus);
 		model.addObject("listBrand", listBrand);
+		model.addObject("listBill", listBill);
+		model.addObject("lisCustomers", lisCustomers);
+		model.addObject("listProductInBill", listProductInBill);
+		model.addObject("listCartItemsInBill", listCartItemsInBill);
 		model.addObject("acc", acc);
 		model.setViewName("admin");
 		return model;
@@ -81,12 +90,8 @@ public class MainController {
 			if(acc.getPosition().equals("admin")) {
 				return new ModelAndView("redirect:/admin");
 			}else if(acc.getPosition().equals("customer")) {
-				List<Account> listAcc = accountService.list();
 				List<Product> listPro = productService.list();
-				List<Brand> listBrand = brandService.list();
-				model.addObject("listAcc", listAcc);
 				model.addObject("listPro", listPro);
-				model.addObject("listBrand", listBrand);
 				model.addObject("acc", acc);
 				model.setViewName("home");
 				return model;
@@ -97,6 +102,15 @@ public class MainController {
 		
 	}
 	
-	
+	@RequestMapping(value = "/backToShop")
+	public ModelAndView backToShop(ModelAndView model, @RequestParam Integer id) {
+		Account acc = accountService.get(id);
+		List<Product> listPro = productService.list();
+		List<Brand> listBrand = brandService.list();
+		model.addObject("listPro", listPro);
+		model.addObject("acc", acc);
+		model.setViewName("home");
+		return model;
+	}
 	
 }

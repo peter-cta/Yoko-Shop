@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri = "http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
@@ -26,7 +25,7 @@
                 <div class="title">
                     <div class="row">
                         <div class="col">
-                            <h4><b>Shopping Cart</b></h4>
+                            <h4><b>Đặt hàng thành công</b></h4>
                         </div>
                         <div class="col align-self-center text-right text-muted">${listProduct.size()} items</div>
                     </div>
@@ -39,8 +38,8 @@
 	                            <div class="row text-muted">Shirt</div>
 	                            <div class="row">${listProduct[i-1].name}</div>
 	                        </div> 
-	                        <div class="col"> <a href="/reduceQty?id=${acc.id}&&idci=${listItems[i-1].id}">-</a><a href="#" class="border">${listItems[i-1].quantity}</a><a href="/increaseQty?id=${acc.id}&&idci=${listItems[i-1].id}">+</a></div>
-	                        <div class="col">&dollar; ${listProduct[i-1].price} <a href="deleteInCart?id=${acc.id}&&idp=${listProduct[i-1].id}" class="close">&#10005;</a></div>
+	                        <div class="col"><a href="#" class="border">${listItems[i-1].quantity}</a></div>
+	                        <div class="col">&dollar; ${listProduct[i-1].price}</div>
 	                    </div>
 	                </div>
           		</c:forEach>
@@ -48,29 +47,26 @@
             </div>
             <div class="col-md-4 summary">
                 <div>
-                    <h5><b>Summary</b></h5>
+                    <h5><b>Thông Tin Khách Hàng</b></h5>
                 </div>
-                <hr>
+                <hr>               
                 <div class="row">
-                    <div class="col" style="padding-left:0;">Items : ${listProduct.size()}</div>
-                    <div class="col text-right">&dollar; ${cart.total}</div>
+                    <p>Khách Hàng : ${customer.name}</p>                   
                 </div>
-                <form:form action="createBill" method="post">
-                    <p>SHIPPING</p> 
-                    <select>
-                        <option class="text-muted">Giao Hàng Tiêu Chuẩn- &dollar;5.00</option>
-                    </select>
-                    <p>Đỉa Chỉ Giao Hàng</p> 
-                    <input type="text" id="code" name="address" placeholder="*Nhập địa chỉ"/>
-                    <input type="hidden" id="accId" name="accId" value="${acc.id}"/>
-                    <input type="hidden" id="cartId" name="cartId" value="${cart.id}"/>
+                <div class="row">                   
+                    <p>SĐT : ${customer.phone}</p>
+                </div>
+                <div class="row">                   
+                    <p>Địa chỉ nhận hàng : ${bill.address}</p>
+                </div>
+                <div class="row">                   
+                    <p>Thanh toán  : Khi nhận hàng</p>
+                </div>
+                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                    <div class="col">TOTAL PRICE</div>
+                    <div class="col text-right">&euro; ${bill.amount}</div>
+                </div> 
                 
-	                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-	                    <div class="col">TOTAL PRICE</div>
-	                    <div class="col text-right">&dollar; ${cart.total + 5}</div>
-	                </div>
-                	<button class="btn" type="submit">CHECKOUT</button>
-                </form:form>
             </div>
         </div>
     </div>

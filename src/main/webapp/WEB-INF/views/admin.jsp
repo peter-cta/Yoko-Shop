@@ -15,7 +15,6 @@
 	rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-
 </head>
 
 <body>
@@ -26,6 +25,8 @@
 			class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
 			<i class="fas fa-user-secret me-2"></i>Admin
 		</div>
+		<button class="w3-bar-item w3-button tablink"
+			onclick="openCity(event, 'Order')">Order</button>
 		<button class="w3-bar-item w3-button tablink"
 			onclick="openCity(event, 'Product')">Product</button>
 		<button class="w3-bar-item w3-button tablink"
@@ -62,14 +63,83 @@
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle second-text fw-bold" href="#"
 						id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-						aria-expanded="false"> <i class="fas fa-user me-2"></i>admin</a>
-					</li>
+						aria-expanded="false"> <i class="fas fa-user me-2"></i>admin
+					</a></li>
 				</ul>
 			</div>
 		</nav>
 
+		<div id="Order" class="w3-container city">
+			<h2 style="display: inline; margin-left: 30px;">List of Order</h2>
+			
+			<div class="container">
+			<c:forEach var="i" begin = "1" end = "${listBill.size()}" varStatus="status">
+				<div class="row" style="border-style: double; margin-top: 20px;">
+					<div class="col-md-8 cart" style="margin-top: 15px;">
+						<div class="title">
+							<div class="row">
+								<div class="col">
+									<h4>
+										<b>Đơn đặt ${i}</b>
+									</h4>
+								</div>
+								<div class="col align-self-center text-right text-muted">${listProduct.size()}
+									items</div>
+							</div>
+						</div>
+						<c:forEach var="j" begin="1" end="${listProductInBill[i-1].size()}"
+							varStatus="status">
+							<div class="row border-top border-bottom">
+								<div class="row main align-items-center">
+									<div class="col-2">
+										<img class="img-fluid"
+											src="resources/images/${listProductInBill[i-1][j-1].img}">
+									</div>
+									<div class="col">
+										<div class="row text-muted">Shirt</div>
+										<div class="row">${listProductInBill[i-1][j-1].name}</div>
+									</div>
+									<div class="col">
+										<a href="#" class="border">${listCartItemsInBill[i-1][j-1].quantity}</a>
+									</div>
+									<div class="col">&dollar; ${listProductInBill[i-1][j-1].price}</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+					<div class="col-md-4 summary" style="margin-top: 15px;">
+						<div>
+							<h5>
+								<b>Thông Tin Khách Hàng</b>
+							</h5>
+						</div>
+						<hr>
+						<div class="row">
+							<p>Khách Hàng : ${lisCustomers[i-1].name}</p>
+						</div>
+						<div class="row">
+							<p>SĐT : ${lisCustomers[i-1].phone}</p>
+						</div>
+						<div class="row">
+							<p>Địa chỉ nhận hàng : ${listBill[i-1].address}</p>
+						</div>
+						<div class="row">
+							<p>Thanh toán : Khi nhận hàng</p>
+						</div>
+						<div class="row"
+							style="border-top: 1px solid rgba(0, 0, 0, .1); padding: 2vh 0;">
+							<div class="col">TOTAL PRICE</div>
+							<div class="col text-right">&euro; ${listBill[i-1].amount}</div>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+			</div>
 
-		<div id="Product" class="w3-container city">
+
+		</div>
+
+		<div id="Product" class="w3-container city" style="display: none">
 			<h2 style="display: inline">List of Products</h2>
 			<a href="newProduct" class="btn btn-primary fa fa-plus"
 				style="position: fixed; left: 1200px;"> NEW</a>
@@ -94,14 +164,12 @@
 							<tr>
 								<th scope="row">${status.index + 1}</th>
 								<td>${pro.name}</td>
-								<td>${pro.img}</td>					
+								<td>${pro.img}</td>
 								<td>${pro.price}</td>
 								<td>${pro.des}</td>
 								<td>${pro.brandID}</td>
-								<td>
-									<a href="editProduct?id=${pro.id}">Edit</a>
-									&nbsp;&nbsp; <a href="deleteProduct?id=${pro.id}">Delete</a>
-								</td>
+								<td><a href="editProduct?id=${pro.id}">Edit</a>
+									&nbsp;&nbsp; <a href="deleteProduct?id=${pro.id}">Delete</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -140,10 +208,8 @@
 								<td>${cus.phone}</td>
 								<td>${cus.address}</td>
 								<td>${cus.account_id}</td>
-								<td>
-									<a href="editCustomer?id=${cus.id}">Edit</a> 
-									&nbsp;&nbsp; <a href="deleteCustomer?id=${cus.id}">Delete</a>
-								</td>
+								<td><a href="editCustomer?id=${cus.id}">Edit</a>
+									&nbsp;&nbsp; <a href="deleteCustomer?id=${cus.id}">Delete</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -180,11 +246,10 @@
 								<td>${acc.password}</td>
 								<td>${acc.position}</td>
 								<td>${acc.enable}</td>
-								<td><a href="editAccount?id=${acc.id}">Edit</a> &nbsp;&nbsp; <a
-									href="deleteAccount?id=${acc.id}">Delete</a>
-									&nbsp;&nbsp;
-									<a href="blockAccount?id=${acc.id}" style="color: red">Block</a>
-								</td>
+								<td><a href="editAccount?id=${acc.id}">Edit</a>
+									&nbsp;&nbsp; <a href="deleteAccount?id=${acc.id}">Delete</a>
+									&nbsp;&nbsp; <a href="blockAccount?id=${acc.id}"
+									style="color: red">Block</a></td>
 							</tr>
 
 						</c:forEach>

@@ -10,4 +10,7 @@ public interface ProductDAO {
 	public Product get(Integer id);
 	public int delete(Integer id);
 	public List<Product> list();
+	public List<Product> getGucci();
+	public List<Product> get8seconds();
+	public List<Product> getShanghai();
 }

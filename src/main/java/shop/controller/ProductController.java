@@ -1,5 +1,7 @@
 package shop.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +13,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import shop.dao.ProductDAO;
+import shop.model.Account;
 import shop.model.Product;
+import shop.service.AccountService;
 import shop.service.ProductService;
 
 @Controller
 public class ProductController {
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private AccountService accountService;
 
 	@RequestMapping(value = "/productDetail", method = RequestMethod.GET)
-	public ModelAndView ProductDetail(ModelAndView model, @RequestParam Integer id) {
-		Product product = productService.get(id);
+	public ModelAndView ProductDetail(ModelAndView model, @RequestParam Integer id, @RequestParam Integer idp) {
+		Account acc = accountService.get(id);
+		Product product = productService.get(idp);
 		model.addObject("product", product);
+		model.addObject("acc", acc);
 		model.setViewName("product_detail");
 		return model;
 	}
@@ -64,5 +73,46 @@ public class ProductController {
 		productService.delete(id);
 		return new ModelAndView("redirect:/admin");
 	}
+	
+	@RequestMapping(value = "/gucci", method = RequestMethod.GET)
+	public ModelAndView getGucci(ModelAndView model, @RequestParam Integer id) {
+		List<Product> listPro = productService.getGucci();
+		Account acc = accountService.get(id);
+		model.addObject("listPro", listPro);
+		model.addObject("acc", acc);
+		model.setViewName("home");
+		return model;
+	}
+	
+	@RequestMapping(value = "/8seconds")
+	public ModelAndView get8seconds(ModelAndView model, @RequestParam Integer id) {
+		List<Product> listPro = productService.get8seconds();
+		Account acc = accountService.get(id);
+		model.addObject("listPro", listPro);
+		model.addObject("acc", acc);
+		model.setViewName("home");
+		return model;
+	}
+	
+	@RequestMapping(value = "/shanghai")
+	public ModelAndView getshanghai(ModelAndView model, @RequestParam Integer id) {
+		List<Product> listPro = productService.getShanghai();
+		Account acc = accountService.get(id);
+		model.addObject("listPro", listPro);
+		model.addObject("acc", acc);
+		model.setViewName("home");
+		return model;
+	}
+	
+	@RequestMapping(value = "/getAllItems")
+	public ModelAndView getAllItems(ModelAndView model, @RequestParam Integer id) {
+		List<Product> listPro = productService.list();
+		Account acc = accountService.get(id);
+		model.addObject("listPro", listPro);
+		model.addObject("acc", acc);
+		model.setViewName("home");
+		return model;
+	}
+	
 
 }

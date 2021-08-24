@@ -65,14 +65,12 @@ body {
 								<input type="password" name = "password" id="password" class="form-control">
 							</div>
 							<div class="form-group">
-								<label for="remember-me" class="text-info"><span>Remember
-										me</span> <span><input id="remember-me" name="remember-me"
-										type="checkbox"></span></label><br> <input type="submit"
+								<br> 
+								<input type="submit"
 									name="submit" class="btn btn-info btn-md" value="submit">
+								<a href="/register" class="text-info" style="margin-left: 300px; font-size:18; text-decoration:underline;">Register here</a>
 							</div>
-							<div id="register-link" class="text-right">
-								<a href="#" class="text-info">Register here</a>
-							</div>
+						
 						</form:form>
 					</div>
 				</div>

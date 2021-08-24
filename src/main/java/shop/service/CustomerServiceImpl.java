@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import shop.dao.CustomerDAO;
+import shop.model.CartItems;
 import shop.model.Customer;
 
 @Service
@@ -43,5 +44,12 @@ public class CustomerServiceImpl implements CustomerService{
 		// TODO Auto-generated method stub
 		return customerDAO.list();
 	}
+
+	@Override
+	public Customer getCustomerFromAccID(int accId) {
+		// TODO Auto-generated method stub
+		return customerDAO.getCustomerFromAccID(accId);
+	}
+
 
 }

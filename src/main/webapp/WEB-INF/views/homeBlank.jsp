@@ -22,11 +22,11 @@
 			</div>
 			<nav class="desktop-nav" style="margin-top: 6px">
 				<ul class="menu" >
-					<li class="menu-item"><a href="/gucci?id=${acc.id}" class="menu-link"
+					<li class="menu-item"><a href="/guccibl" class="menu-link"
 						style="font-size: 20px; color: black;">Gucci</a></li>
-					<li class="menu-item"><a href="/8seconds?id=${acc.id}" class="menu-link"
+					<li class="menu-item"><a href="/8secondsbl" class="menu-link"
 						style="font-size: 20px; color: black;">8seconds</a></li>
-					<li class="menu-item"><a href="/shanghai?id=${acc.id}" class="menu-link"
+					<li class="menu-item"><a href="/shanghaibl" class="menu-link"
 						style="font-size: 20px; color: black;">Shanghai</a></li>
 
 				</ul>
@@ -46,12 +46,12 @@
 				</div>
 			</nav>
 			<div class="cart" style="margin-left: 150px; margin-top: 5px">
-				<a href="checkout?id=${acc.id}" class="fa fa-shopping-cart" style="font-size: 20px; color: black;">
+				<a href="#" class="fa fa-shopping-cart" style="font-size: 20px; color: black;">
 					Cart</a>
 			</div>
 			<div class="account" style="margin-left: 15px; ; margin-top: 5px">
 				<a href="register" class="fa fa-user" style="font-size: 20px; color: black;">
-					${status != 'notlogin' ? acc.username : "Sign Up"} </a>
+					Sign Up </a>
 			</div>
 		</div>
 	</header>
@@ -67,7 +67,7 @@
 						<div class="item-image">
 							<img src="resources/images/${pro.img}" />
 							<div class="button item-button">
-								<a href="/addToCart?id=${acc.id}&&idp=${pro.id}">Add to Cart</a> <a href="/productDetail?id=${acc.id}&&idp=${pro.id}">Quick View</a>
+								<a href="#">Add to Cart</a> <a href="/productDetailbl?idp=${pro.id}">Quick View</a>
 							</div>
 						</div>
 						<div class="item-title">
@@ -78,7 +78,7 @@
 				</c:forEach>
 			</div>
 			<div class="button viewAll-button">
-				<a href="/getAllItems?id=${acc.id}">view all items</a>
+				<a href="/getAllItemsbl">view all items</a>
 			</div>
 		</section>
 	</main>

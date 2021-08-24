@@ -86,5 +86,62 @@ public class ProductDAOImpl implements ProductDAO {
 		};
 		return jdbcTemplate.query(sql, rowMapper);
 	}
+	@Override
+	public List<Product> getGucci() {
+		String sql = "SELECT * FROM Product where brandID=1";
+		
+		RowMapper<Product> rowMapper = new RowMapper<Product>() {
+		
+			@Override
+			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				String img = rs.getString("img");
+				Double price = rs.getDouble("price");
+				String des = rs.getString("des");
+				Integer brandID = rs.getInt("brandID");
+				return new Product(id, name, img, price, des, brandID);
+			}
+		};
+		return jdbcTemplate.query(sql, rowMapper);
+	}
+	@Override
+	public List<Product> get8seconds() {
+		String sql = "SELECT * FROM Product where brandID=2";
+		
+		RowMapper<Product> rowMapper = new RowMapper<Product>() {
+		
+			@Override
+			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				String img = rs.getString("img");
+				Double price = rs.getDouble("price");
+				String des = rs.getString("des");
+				Integer brandID = rs.getInt("brandID");
+				return new Product(id, name, img, price, des, brandID);
+			}
+		};
+		return jdbcTemplate.query(sql, rowMapper);
+	}
+	@Override
+	public List<Product> getShanghai() {
+		String sql = "SELECT * FROM Product where brandID=3";
+		
+		RowMapper<Product> rowMapper = new RowMapper<Product>() {
+		
+			@Override
+			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				String img = rs.getString("img");
+				Double price = rs.getDouble("price");
+				String des = rs.getString("des");
+				Integer brandID = rs.getInt("brandID");
+				return new Product(id, name, img, price, des, brandID);
+			}
+		};
+		return jdbcTemplate.query(sql, rowMapper);
+	}
 
 }
