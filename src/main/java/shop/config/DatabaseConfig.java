@@ -12,9 +12,9 @@ public class DatabaseConfig {
 	@Bean
    public DataSource dataSource(){
       DriverManagerDataSource dataSource = new DriverManagerDataSource();
-      dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-      dataSource.setUrl("jdbc:mysql://localhost:3306/YokoShop");
-      dataSource.setUsername("root");
+      dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+      dataSource.setUrl("jdbc:mysql://db4free.net:3306/yokoshop");
+      dataSource.setUsername("yokoshop");
       dataSource.setPassword("chuanh255");
       return dataSource;
    }
